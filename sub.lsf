@@ -1,0 +1,33 @@
+#!/bin/bash
+#BSUB -nnodes 8
+#BSUB -W 2:00
+#BSUB -P TRN001
+#BSUB -alloc_flags "gpumps smt4"
+#BSUB -o logs/mlmol.%J
+#BSUB -q batch
+
+export PATH=/gpfs/wolf/stf011/world-shared/yzn/mlmol/env/open-ce-1.5.0-py38-0/bin:$PATH
+# export settings
+export OMP_NUM_THREADS=1
+
+# grab nodecount
+nnodes=$(cat ${LSB_DJOB_HOSTFILE} | sort | uniq | grep -v login | grep -v batch | wc -l)
+
+jsrun --smpiargs="-disable_gpu_hooks" -n${nnodes} -a6 -c42 -g6 -r1 \
+      --bind=proportional-packed:7 --launch_distribution=packed \
+      bash -c "\
+      source export_DDP_envvars.sh && \
+      python -u alloy_train.py \
+      --output_dir="/gpfs/wolf/trn001/world-shared/7ny/output" \
+      --train_data_dir="/ccsopen/home/7ny/AlloyBERT/dataset" \
+      --tokenizer_path="/ccsopen/home/7ny/AlloyBERT/alloy-data-tokenizer"\
+      --train_local_bs=64 \
+      --max_epochs=1000 \
+      --start_lr=1e-3 \
+      --adam_eps=1e-8 \
+      --weight_decay=1e-6 \
+      --lr_warmup_steps=0 \
+      --lr_warmup_factor=1 \
+      --lr_schedule type='multistep',milestones='2500 16384',decay_rate='0.1' \
+      --logging_frequency=100 \
+      "
