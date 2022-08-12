@@ -28,13 +28,35 @@ You can easily use our trained model either for inference or you can fine tune i
 ### Training Instructions
 
 1 - Clone the repository 
-2 - Run the following command to install the required packages: pip install --ignore-installed -r requirements.txt
-3 - Run the following command to train the model on your dataset: 
+
+2 - Run the following command to install the required packages: ```pip install --ignore-installed -r requirements.txt```
+
+3 - Run the following command to train the model on your dataset:
+
+```
+python -u alloy_train.py \
+      --output_dir="./output" \
+      --train_data_dir="add your dataset path here" \
+      --tokenizer_path="alloy-data-tokenizer"\
+      --train_local_bs=64 \
+      --max_epochs=1000 \
+      --start_lr=1e-3 \
+      --adam_eps=1e-8 \
+      --weight_decay=1e-6 \
+      --lr_warmup_steps=0 \
+      --lr_warmup_factor=1 \
+      --lr_schedule type='multistep',milestones='2500 16384',decay_rate='0.1' \
+      --logging_frequency=100 \
+      
+```
 
 ### Inference Instructions
 
 1 - Clone the repository 
-2 - Run the following command to install the required packages: pip install --ignore-installed -r requirements.txt
+
+2 - Run the following command to install the required packages: ```pip install --ignore-installed -r requirements.txt```
+
 3 - Unzip the downloaded trained model and tokenizer in the same folder as this readme file
+
 4 - Run through the visualization.ipynb notebook
 
