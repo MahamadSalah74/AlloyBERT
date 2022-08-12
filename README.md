@@ -34,7 +34,7 @@ You can easily use our trained model either for inference or you can fine tune i
 3 - Run the following command to train the model on your dataset:
 
 ```
-python -u alloy_train.py \
+python -u multi_gpu_model_trainer.py \
       --output_dir="./output" \
       --train_data_dir="add your dataset path here" \
       --tokenizer_path="alloy-data-tokenizer"\
