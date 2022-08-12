@@ -34,7 +34,6 @@ from transformers import BertTokenizerFast
 from transformers import TrainingArguments
 from transformers.trainer_utils import is_main_process
 from transformers import DataCollatorForLanguageModeling
-#from modeling_bert_regression import BertForMaskedLMAndMoleculeScores
 
 
 logging.basicConfig(format='%(levelname)s - %(message)s', level=logging.INFO)
@@ -67,7 +66,6 @@ world_rank = int(os.environ['OMPI_COMM_WORLD_RANK'])
 local_rank = int(os.environ['OMPI_COMM_WORLD_LOCAL_RANK'])
 
 device = torch.device('cuda:{}'.format(local_rank))
-#dist.init_process_group('nccl', rank=world_rank, world_size=world_size)
 
 class Options:
     def __init__(self):
