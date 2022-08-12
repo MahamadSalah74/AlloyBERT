@@ -1,6 +1,11 @@
 # AlloyBERT
 
-This github repo was developed during a summer internship at the Oak Ridge National Laboratory through the Pathways to Computing Internship Program. The work is an extension on this [repo](https://github.com/peizong/alloy2vec) worked on by my mentor Dr. Junqi Yin! In this project a large transformers language model is trained on a dataset of material science publications and the results are compared to the previously mentioned repo that used mat2vec to train on the same data.
+This repository was developed during a summer internship at the Oak Ridge National Laboratory through the Pathways to Computing Internship Program. This work is an extension on this [repository](https://github.com/peizong/alloy2vec) worked on by my mentor Dr. Junqi Yin! 
+
+AlloyBERT is a large transformers lanaguge model trained on a dataset of more than 6 million material science publications using the Summit Supercomputer. We used the BERT embeddings to investigate how well the model can differentiate between alloys based on their crystal structures.
+
+Shown below is a umap plot of BERT embeddings for a subset of FCC and BCC alloys 
+![alt text] (https://github.com/MahamadSalah74/AlloyBERT/blob/main/images/umap embeddings of a subset of materials.png?raw=true)
 
 ## Installation and Usage
 
